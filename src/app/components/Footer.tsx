@@ -1,5 +1,3 @@
-import whiteLogo from "figma:asset/9ac0193610fdd7862e1d5408b2e177826b55b72c.png";
-
 export function Footer() {
   return (
     <footer
@@ -22,7 +20,13 @@ export function Footer() {
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={whiteLogo} alt="Yeyak" style={{ height: 48, display: "block", opacity: 0.6 }} />
+          <span style={{
+            fontSize: 24,
+            fontWeight: 800,
+            fontFamily: "'DM Sans', sans-serif",
+            color: "rgba(255,255,255,0.6)",
+            letterSpacing: "-0.03em",
+          }}>yeyak</span>
         </div>
 
         {/* Copyright */}
@@ -48,12 +52,6 @@ export function Footer() {
                 textDecoration: "none",
                 transition: "color 0.2s",
                 fontFamily: "'DM Sans', sans-serif",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.7)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.4)";
               }}
             >
               {link}
