@@ -1,4 +1,4 @@
-import whiteLogo from "figma:asset/9ac0193610fdd7862e1d5408b2e177826b55b72c.png";
+import whiteLogo from "../../../assets/9ac0193610fdd7862e1d5408b2e177826b55b72c.png";
 
 export function Footer() {
   return (
