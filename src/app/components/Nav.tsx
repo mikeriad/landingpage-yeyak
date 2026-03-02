@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import colorLogo from "figma:asset/ab3785ba3d2ce79fe224ecc26eb01eb78a22443c.png";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -38,7 +37,13 @@ export function Nav() {
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={colorLogo} alt="Yeyak" style={{ height: 64, display: "block" }} />
+          <span style={{
+            fontSize: 28,
+            fontWeight: 800,
+            fontFamily: "'DM Sans', sans-serif",
+            color: "#005BF3",
+            letterSpacing: "-0.03em",
+          }}>yeyak</span>
         </div>
 
         {/* Links */}
