@@ -38,7 +38,7 @@ export function Nav() {
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={colorLogo} alt="Yeyak" style={{ height: 40, display: "block" }} />
+          <img src={colorLogo} alt="Yeyak" style={{ height: 120, display: "block" }} />
         </div>
 
         {/* Links */}

@@ -22,7 +22,7 @@ export function Footer() {
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={logo} alt="Yeyak" style={{ height: 32, display: "block", opacity: 0.6 }} />
+          <img src={logo} alt="Yeyak" style={{ height: 96, display: "block", opacity: 0.6 }} />
         </div>
 
         {/* Copyright */}
