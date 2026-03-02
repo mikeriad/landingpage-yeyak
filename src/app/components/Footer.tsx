@@ -1,4 +1,4 @@
-import whiteLogo from "../../../assets/logo.png";
+import logo from "../../../assets/logo.png";
 
 export function Footer() {
   return (
@@ -22,7 +22,7 @@ export function Footer() {
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={whiteLogo} alt="Yeyak" style={{ height: 48, display: "block", opacity: 0.6 }} />
+          <img src={logo} alt="Yeyak" style={{ height: 32, display: "block", opacity: 0.6 }} />
         </div>
 
         {/* Copyright */}
