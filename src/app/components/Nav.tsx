@@ -33,12 +33,12 @@ export function Nav() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "16px 32px",
+          padding: "8px 32px",
         }}
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={colorLogo} alt="Yeyak" style={{ height: 120, display: "block" }} />
+          <img src={colorLogo} alt="Yeyak" style={{ height: 36, display: "block" }} />
         </div>
 
         {/* Links */}
