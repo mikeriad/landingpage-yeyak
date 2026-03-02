@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import colorLogo from "../../../assets/logo.png";
+import colorLogo from "../../assets/logo.png";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
