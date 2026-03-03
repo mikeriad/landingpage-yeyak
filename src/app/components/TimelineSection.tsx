@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const timelineItems = [
   {
@@ -32,66 +33,6 @@ const timelineItems = [
     desc: "Expanded globally with localisation in 9 languages. Named one of the top 50 fastest-growing SaaS platforms.",
   },
 ];
-
-function TimelineItem({ item, index }: { item: typeof timelineItems[0]; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  const isOdd = index % 2 === 0;
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        marginBottom: 48,
-        position: "relative",
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(30px)",
-        transition: `opacity 0.7s ease ${index * 0.1}s, transform 0.7s ease ${index * 0.1}s`,
-      }}
-    >
-      {/* Odd: content left, dot center, empty right */}
-      {/* Even: empty left, dot center, content right */}
-
-      {/* Left side */}
-      <div style={{ width: "calc(50% - 40px)" }}>
-        {isOdd && <TimelineCard item={item} isOdd={true} />}
-      </div>
-
-      {/* Dot */}
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: 36,
-          width: 16,
-          height: 16,
-          background: isOdd ? "#FF774C" : "#005BF3",
-          borderRadius: "50%",
-          border: "3px solid #fff",
-          transform: "translateX(-50%)",
-          zIndex: 2,
-          boxShadow: `0 0 0 4px ${isOdd ? "rgba(255,119,76,0.15)" : "rgba(0,91,243,0.15)"}`,
-        }}
-      />
-
-      {/* Right side */}
-      <div style={{ width: "calc(50% - 40px)", marginLeft: "auto" }}>
-        {!isOdd && <TimelineCard item={item} isOdd={false} />}
-      </div>
-    </div>
-  );
-}
 
 function TimelineCard({ item, isOdd }: { item: typeof timelineItems[0]; isOdd: boolean }) {
   return (
@@ -150,9 +91,121 @@ function TimelineCard({ item, isOdd }: { item: typeof timelineItems[0]; isOdd: b
   );
 }
 
-export function TimelineSection() {
+function TimelineItem({
+  item,
+  index,
+  isMobile,
+}: {
+  item: typeof timelineItems[0];
+  index: number;
+  isMobile: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  const isOdd = index % 2 === 0;
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div
+        ref={ref}
+        style={{
+          display: "flex",
+          gap: 16,
+          marginBottom: 24,
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(20px)",
+          transition: `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s`,
+        }}
+      >
+        {/* Left: dot + line */}
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
+          <div
+            style={{
+              width: 14,
+              height: 14,
+              borderRadius: "50%",
+              background: isOdd ? "#FF774C" : "#005BF3",
+              border: "3px solid #fff",
+              boxShadow: `0 0 0 3px ${isOdd ? "rgba(255,119,76,0.2)" : "rgba(0,91,243,0.2)"}`,
+              flexShrink: 0,
+              marginTop: 6,
+            }}
+          />
+          <div
+            style={{
+              flex: 1,
+              width: 2,
+              background: "#E5E7EB",
+              marginTop: 8,
+            }}
+          />
+        </div>
+
+        {/* Card */}
+        <div style={{ flex: 1, paddingBottom: 8 }}>
+          <TimelineCard item={item} isOdd={isOdd} />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <section style={{ padding: "100px 32px", background: "#fff" }}>
+    <div
+      ref={ref}
+      style={{
+        display: "flex",
+        alignItems: "flex-start",
+        marginBottom: 48,
+        position: "relative",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(30px)",
+        transition: `opacity 0.7s ease ${index * 0.1}s, transform 0.7s ease ${index * 0.1}s`,
+      }}
+    >
+      {/* Left side */}
+      <div style={{ width: "calc(50% - 40px)" }}>
+        {isOdd && <TimelineCard item={item} isOdd={true} />}
+      </div>
+
+      {/* Dot */}
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: 36,
+          width: 16,
+          height: 16,
+          background: isOdd ? "#FF774C" : "#005BF3",
+          borderRadius: "50%",
+          border: "3px solid #fff",
+          transform: "translateX(-50%)",
+          zIndex: 2,
+          boxShadow: `0 0 0 4px ${isOdd ? "rgba(255,119,76,0.15)" : "rgba(0,91,243,0.15)"}`,
+        }}
+      />
+
+      {/* Right side */}
+      <div style={{ width: "calc(50% - 40px)", marginLeft: "auto" }}>
+        {!isOdd && <TimelineCard item={item} isOdd={false} />}
+      </div>
+    </div>
+  );
+}
+
+export function TimelineSection() {
+  const isMobile = useIsMobile();
+
+  return (
+    <section style={{ padding: isMobile ? "60px 20px" : "100px 32px", background: "#fff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Section header */}
         <div
@@ -176,7 +229,6 @@ export function TimelineSection() {
             color: "#1A1A2E",
             letterSpacing: "-0.03em",
             lineHeight: 1.15,
-            marginBottom: 20,
             margin: "0 0 20px",
           }}
         >
@@ -201,21 +253,23 @@ export function TimelineSection() {
             position: "relative",
           }}
         >
-          {/* Center line */}
-          <div
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: 0,
-              bottom: 0,
-              width: 2,
-              background: "#E5E7EB",
-              transform: "translateX(-50%)",
-            }}
-          />
+          {/* Center line (desktop only) */}
+          {!isMobile && (
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: 0,
+                bottom: 0,
+                width: 2,
+                background: "#E5E7EB",
+                transform: "translateX(-50%)",
+              }}
+            />
+          )}
 
           {timelineItems.map((item, i) => (
-            <TimelineItem key={item.year} item={item} index={i} />
+            <TimelineItem key={item.year} item={item} index={i} isMobile={isMobile} />
           ))}
         </div>
       </div>

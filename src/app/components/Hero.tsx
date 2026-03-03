@@ -1,4 +1,8 @@
+import { useIsMobile } from "../hooks/useIsMobile";
+
 export function Hero() {
+  const isMobile = useIsMobile();
+
   const stats = [
     { number: "120K+", label: "Active Users" },
     { number: "48", label: "Cities Served" },
@@ -11,7 +15,7 @@ export function Hero() {
   return (
     <section
       style={{
-        padding: "180px 32px 100px",
+        padding: isMobile ? "120px 20px 80px" : "180px 32px 100px",
         background: "#1A1A2E",
         position: "relative",
         overflow: "hidden",
@@ -115,13 +119,12 @@ export function Hero() {
         <h1
           style={{
             fontFamily: "'Outfit', sans-serif",
-            fontSize: "clamp(42px, 6vw, 72px)",
+            fontSize: "clamp(36px, 6vw, 72px)",
             fontWeight: 700,
             color: "#fff",
             lineHeight: 1.1,
             maxWidth: 800,
             letterSpacing: "-0.03em",
-            marginBottom: 24,
             margin: "0 0 24px",
           }}
         >
@@ -141,7 +144,7 @@ export function Hero() {
         {/* Subtitle */}
         <p
           style={{
-            fontSize: 18,
+            fontSize: isMobile ? 16 : 18,
             color: "rgba(255,255,255,0.55)",
             maxWidth: 560,
             lineHeight: 1.7,
@@ -156,9 +159,9 @@ export function Hero() {
         {/* Stats */}
         <div
           style={{
-            display: "flex",
-            gap: 48,
-            flexWrap: "wrap",
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, auto)",
+            gap: isMobile ? "24px 32px" : 48,
             paddingTop: 48,
             borderTop: "1px solid rgba(255,255,255,0.08)",
           }}
@@ -168,7 +171,7 @@ export function Hero() {
               <div
                 style={{
                   fontFamily: "'Outfit', sans-serif",
-                  fontSize: 36,
+                  fontSize: isMobile ? 28 : 36,
                   fontWeight: 700,
                   color: "#fff",
                   letterSpacing: "-0.02em",

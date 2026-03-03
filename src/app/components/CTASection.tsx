@@ -1,10 +1,14 @@
+import { useIsMobile } from "../hooks/useIsMobile";
+
 export function CTASection() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       style={{
         background: "#1A1A2E",
         textAlign: "center",
-        padding: "100px 32px",
+        padding: isMobile ? "60px 20px" : "100px 32px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -29,12 +33,11 @@ export function CTASection() {
         <h2
           style={{
             fontFamily: "'Outfit', sans-serif",
-            fontSize: "clamp(32px, 4vw, 48px)",
+            fontSize: "clamp(28px, 4vw, 48px)",
             fontWeight: 700,
             color: "#fff",
             letterSpacing: "-0.03em",
             lineHeight: 1.15,
-            marginBottom: 16,
             margin: "0 0 16px",
           }}
         >
@@ -42,7 +45,7 @@ export function CTASection() {
         </h2>
         <p
           style={{
-            fontSize: 17,
+            fontSize: isMobile ? 15 : 17,
             color: "rgba(255,255,255,0.5)",
             margin: "0 auto 40px",
             maxWidth: 500,
@@ -58,9 +61,9 @@ export function CTASection() {
           style={{
             background: "#FF774C",
             color: "#fff",
-            padding: "14px 36px",
+            padding: isMobile ? "12px 28px" : "14px 36px",
             borderRadius: 10,
-            fontSize: 16,
+            fontSize: isMobile ? 15 : 16,
             fontWeight: 600,
             textDecoration: "none",
             display: "inline-flex",

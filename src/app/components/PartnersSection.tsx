@@ -1,3 +1,5 @@
+import { useIsMobile } from "../hooks/useIsMobile";
+
 const partners = [
   "Accelify",
   "NovaSoft",
@@ -10,8 +12,10 @@ const partners = [
 ];
 
 export function PartnersSection() {
+  const isMobile = useIsMobile();
+
   return (
-    <section style={{ padding: "100px 32px", background: "#F3F4F6", textAlign: "center" }}>
+    <section style={{ padding: isMobile ? "60px 20px" : "100px 32px", background: "#F3F4F6", textAlign: "center" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div
           style={{
@@ -34,7 +38,6 @@ export function PartnersSection() {
             color: "#1A1A2E",
             letterSpacing: "-0.03em",
             lineHeight: 1.15,
-            marginBottom: 20,
             margin: "0 0 20px",
           }}
         >
@@ -57,8 +60,8 @@ export function PartnersSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 24,
+            gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)",
+            gap: isMobile ? 16 : 24,
             maxWidth: 900,
             margin: "0 auto",
           }}
@@ -69,12 +72,12 @@ export function PartnersSection() {
               style={{
                 background: "#fff",
                 borderRadius: 12,
-                padding: "32px 24px",
+                padding: isMobile ? "24px 16px" : "32px 24px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 border: "1px solid #E5E7EB",
-                minHeight: 100,
+                minHeight: isMobile ? 80 : 100,
                 transition: "all 0.3s",
                 cursor: "default",
               }}
@@ -93,7 +96,7 @@ export function PartnersSection() {
                 style={{
                   fontFamily: "'Outfit', sans-serif",
                   fontWeight: 600,
-                  fontSize: 16,
+                  fontSize: isMobile ? 14 : 16,
                   color: "#6B7280",
                   letterSpacing: "-0.01em",
                   opacity: 0.6,

@@ -1,12 +1,15 @@
 import logo from "../../assets/logo.png";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 export function Footer() {
+  const isMobile = useIsMobile();
+
   return (
     <footer
       style={{
         background: "#1A1A2E",
         borderTop: "1px solid rgba(255,255,255,0.06)",
-        padding: "48px 32px",
+        padding: isMobile ? "40px 20px" : "48px 32px",
       }}
     >
       <div
@@ -14,15 +17,16 @@ export function Footer() {
           maxWidth: 1200,
           margin: "0 auto",
           display: "flex",
-          justifyContent: "space-between",
+          flexDirection: isMobile ? "column" : "row",
+          justifyContent: isMobile ? "center" : "space-between",
           alignItems: "center",
-          flexWrap: "wrap",
-          gap: 20,
+          gap: isMobile ? 24 : 20,
+          textAlign: isMobile ? "center" : undefined,
         }}
       >
         {/* Logo */}
         <div style={{ display: "flex", alignItems: "center" }}>
-          <img src={logo} alt="Yeyak" style={{ height: 96, display: "block", opacity: 0.6 }} />
+          <img src={logo} alt="Yeyak" style={{ height: 64, display: "block", opacity: 0.6 }} />
         </div>
 
         {/* Copyright */}
@@ -37,7 +41,7 @@ export function Footer() {
         </span>
 
         {/* Links */}
-        <div style={{ display: "flex", gap: 24 }}>
+        <div style={{ display: "flex", gap: isMobile ? 20 : 24, flexWrap: "wrap", justifyContent: "center" }}>
           {["Privacy", "Terms", "Contact", "Careers"].map((link) => (
             <a
               key={link}

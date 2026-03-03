@@ -1,3 +1,5 @@
+import { useIsMobile } from "../hooks/useIsMobile";
+
 type CardProps = {
   dark?: boolean;
   fullWidth?: boolean;
@@ -7,18 +9,19 @@ type CardProps = {
   label: string;
   title: string;
   desc: string;
+  isMobile: boolean;
 };
 
-function MissionCard({ dark, fullWidth, iconBg, iconColor, emoji, label, title, desc }: CardProps) {
+function MissionCard({ dark, fullWidth, iconBg, iconColor, emoji, label, title, desc, isMobile }: CardProps) {
   return (
     <div
       style={{
         background: dark ? "#1A1A2E" : "#F3F4F6",
         borderRadius: 16,
-        padding: 40,
+        padding: isMobile ? 28 : 40,
         position: "relative",
         overflow: "hidden",
-        gridColumn: fullWidth ? "1 / -1" : undefined,
+        gridColumn: fullWidth && !isMobile ? "1 / -1" : undefined,
         transition: "transform 0.3s, box-shadow 0.3s",
         cursor: "default",
       }}
@@ -95,8 +98,10 @@ function MissionCard({ dark, fullWidth, iconBg, iconColor, emoji, label, title, 
 }
 
 export function MissionSection() {
+  const isMobile = useIsMobile();
+
   return (
-    <section style={{ padding: "100px 32px", background: "#fff" }}>
+    <section style={{ padding: isMobile ? "60px 20px" : "100px 32px", background: "#fff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Section header */}
         <div
@@ -120,7 +125,6 @@ export function MissionSection() {
             color: "#1A1A2E",
             letterSpacing: "-0.03em",
             lineHeight: 1.15,
-            marginBottom: 20,
             margin: "0 0 20px",
           }}
         >
@@ -143,12 +147,13 @@ export function MissionSection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 32,
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? 16 : 32,
             marginTop: 64,
           }}
         >
           <MissionCard
+            isMobile={isMobile}
             iconBg="#FFF0EB"
             iconColor="#FF774C"
             emoji="🎯"
@@ -157,6 +162,7 @@ export function MissionSection() {
             desc="We believe the act of scheduling shouldn't require expertise. Yeyak removes friction from bookings for businesses of all sizes — from solo freelancers to enterprise teams managing thousands of appointments daily."
           />
           <MissionCard
+            isMobile={isMobile}
             dark
             iconBg="rgba(255,255,255,0.1)"
             iconColor="#fff"
@@ -166,6 +172,7 @@ export function MissionSection() {
             desc="Our north star is a future where every interaction between people and businesses is seamless, intelligent, and respectful of everyone's time. We're laying the infrastructure to make that vision real."
           />
           <MissionCard
+            isMobile={isMobile}
             fullWidth
             iconBg="#E8F0FE"
             iconColor="#005BF3"

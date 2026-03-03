@@ -1,4 +1,8 @@
+import { useIsMobile } from "../hooks/useIsMobile";
+
 export function StorySection() {
+  const isMobile = useIsMobile();
+
   const colorMeanings = [
     {
       color: "#FF774C",
@@ -13,7 +17,7 @@ export function StorySection() {
   ];
 
   return (
-    <section style={{ padding: "100px 32px", background: "#F3F4F6" }}>
+    <section style={{ padding: isMobile ? "60px 20px" : "100px 32px", background: "#F3F4F6" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* Section header */}
         <div
@@ -37,7 +41,6 @@ export function StorySection() {
             color: "#1A1A2E",
             letterSpacing: "-0.03em",
             lineHeight: 1.15,
-            marginBottom: 20,
             margin: "0 0 20px",
           }}
         >
@@ -60,8 +63,8 @@ export function StorySection() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 80,
+            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+            gap: isMobile ? 40 : 80,
             marginTop: 64,
             alignItems: "start",
           }}
